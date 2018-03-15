@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-
 import com.example.demo.domain.Admin;
 import com.example.demo.error_handling.ResourceNotFoundException;
 import com.example.demo.repositories.AdminRepository;
