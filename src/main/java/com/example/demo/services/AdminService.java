@@ -12,5 +12,4 @@ import java.util.Optional;
 @Service
 public class AdminService extends CrudService<Admin, String, AdminRepository> {
 
-
 }
