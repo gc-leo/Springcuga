@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @Document(collection = "cpois")
 public class Cpoi {
     @Id
@@ -24,7 +26,8 @@ public class Cpoi {
     //Each Cpoi has its own set of labels?
     //public List<Label> labels;
 
-    public Cpoi() {}
+    public Cpoi() {
+    }
 
     public Cpoi(String name, String location, String address, String description, String image, String working_hours) {
         this.name = name;

@@ -3,60 +3,60 @@ package com.example.demo.controllers;
 import com.example.demo.domain.Admin;
 
 import com.example.demo.repositories.AdminRepository;
+import com.example.demo.services.AdminService;
+import io.swagger.annotations.Api;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin")
+@Api(description = "admin api")
 public class AdminController {
 
-//    @Autowired
-    AdminRepository adminRepository;
+    @Autowired
+    private AdminService adminService;
 
-    public AdminController(AdminRepository adminRepository){
-        this.adminRepository = adminRepository;
+    @ApiOperation(value = "Get list of all Admins", notes = "Some notes")
+    @GetMapping
+    public ResponseEntity<List<Admin>> getAll() {
+        return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Admins", notes = "Get all admins by using findAll()")
-    @GetMapping(value="/admins")
-    public Iterable<Admin> admin() {
-        return adminRepository.findAll();
+    @ApiOperation(value = "Get single Admin by id", notes = "Some notes")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Admin> getById(@PathVariable String id) {
+        return new ResponseEntity<>(adminService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping(value="/admins")
-    public String save(@RequestBody Admin admin) {
-        adminRepository.save(admin);
-
-        return admin.getId_admin();
+    @ApiOperation(value = "Create cpoi", notes = "Some notes")
+    @PostMapping
+    public ResponseEntity<?> add(@Valid @RequestBody Admin cPoi) {
+        adminService.add(cPoi);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-//    @GetMapping( value="/admins/{id}")
-//    public Admin show(@PathVariable String id) {
-//        return adminRepository.findOne(id);
-//    }
-//
-//    @PutMapping( value="/admins/{id}")
-//    public Admin update(@PathVariable String id, @RequestBody Admin admin) {
-//        Admin c = adminRepository.findOne(id);
-//
-//        if(admin.getEmail() != null)
-//            c.setEmail(admin.getEmail());
-//        //check if profile is filled
-////        if(admin.profile.getFamily_name() != null) {
-//////            c.setProfile(..bla,blabla)
-////        }
-//        adminRepository.save(c);
-//        return c;
-//    }
-//
-//    @DeleteMapping( value="/admins/{id}")
-//    public String delete(@PathVariable String id) {
-//        Admin admin = adminRepository.findOne(id);
-//        adminRepository.delete(admin);
-//
-//        return "admin deleted";
-//    }
+    @ApiOperation(value = "Delete cpoi", notes = "Some notes")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable String id) {
+        adminService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation(value = "Update cpoi", notes = "Some notes")
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Admin cPoi) {
+        adminService.update(cPoi);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
+
