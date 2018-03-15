@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Document(collection = "admins")
 public class Admin {
+
     @Id
     public String id_admin;
     public String email;
@@ -23,6 +24,12 @@ public class Admin {
     }
 
     public Admin(String email, Profile profile) {
+        this.email = email;
+        this.profile = profile;
+    }
+
+    public Admin(String id_admin, String email, Profile profile) {
+        this.id_admin = id_admin;
         this.email = email;
         this.profile = profile;
     }

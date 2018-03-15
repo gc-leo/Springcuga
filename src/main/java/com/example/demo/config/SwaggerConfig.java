@@ -20,7 +20,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.webapp.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo.controllers"))
                 .build();
 //                .pathMapping("/");
     }
