@@ -46,7 +46,7 @@ public class RestExceptionHandler {
         for (FieldError fe : exception.getBindingResult().getFieldErrors()) {
             List<ValidationError> validationErrorList = errorDetails.getErrors().get(fe.getField());
             if (validationErrorList == null) {
-                validationErrorList = new ArrayList<ValidationError>();
+                validationErrorList = new ArrayList<>();
                 errorDetails.getErrors().put(fe.getField(), validationErrorList);
             }
             ValidationError validationError = new ValidationError();

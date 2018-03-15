@@ -7,27 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "coins")
+@Document
 public class Coin {
 
     @Id
     public String id_coin;
-
     public String name;
     public String criptoname;
 
-    public Coin(){}
-
-    public Coin(String name, String criptoname) {
-        this.name = name;
-        this.criptoname = criptoname;
-    }
-
-    @Override
-    public String toString() {
-        return "Coin{" +
-                "id_coin='" + id_coin + '\'' +
-                ", criptoname='" + criptoname + '\'' +
-                '}';
-    }
 }
