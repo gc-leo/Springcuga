@@ -21,12 +21,13 @@ import java.util.List;
 @Api(description = "admin api")
 public class AdminController {
 
+
     @Autowired
     private AdminService adminService;
 
     @ApiOperation(value = "Get list of all Admins", notes = "Some notes")
     @GetMapping
-    public ResponseEntity<List<Admin>> getAll() {
+    public ResponseEntity<List<Admin>> getAll()  {
         return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
     }
 
