@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Cpoi;
-import com.example.demo.services.AdminService;
 import com.example.demo.services.CpoiService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;

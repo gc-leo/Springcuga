@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.domain.Admin;
 
-import com.example.demo.repositories.AdminRepository;
 import com.example.demo.services.AdminService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,8 @@ public class AdminController {
 
     @ApiOperation(value = "Get list of all Admins", notes = "Some notes")
     @GetMapping
-    public ResponseEntity<List<Admin>> getAll()  {
+    public ResponseEntity<List<Admin>> getAll() {
+        System.out.println("kita" + adminService);
         return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
     }
 
