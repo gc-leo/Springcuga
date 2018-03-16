@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Admin;
-
-import com.example.demo.repositories.AdminRepository;
+import com.example.demo.domain.Cpoi;
 import com.example.demo.services.AdminService;
+import com.example.demo.services.CpoiService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,47 +16,44 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
-@Api(description = "admin api")
-public class AdminController {
+@RequestMapping("/cpoi")
+@Api(description = "cpoi api")
+public class CpoiController {
 
     @Autowired
-    private AdminService adminService;
+    private CpoiService cpoiService;
 
-    @ApiOperation(value = "Get list of all Admins", notes = "Some notes")
+    @ApiOperation(value = "Get list of all Cpois", notes = "Some notes")
     @GetMapping
-    public ResponseEntity<List<Admin>> getAll() {
-        return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<Cpoi>> getAll() {
+        return new ResponseEntity<>(cpoiService.getAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Get single Admin by id", notes = "Some notes")
+    @ApiOperation(value = "Get single Cpoi by id", notes = "Some notes")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Admin> getById(@PathVariable String id) {
-        return new ResponseEntity<>(adminService.getById(id), HttpStatus.OK);
+    public ResponseEntity<Cpoi> getById(@PathVariable String id) {
+        return new ResponseEntity<>(cpoiService.getById(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create cpoi", notes = "Some notes")
     @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody Admin cPoi) {
+    public ResponseEntity<?> add(@Valid @RequestBody Cpoi cPoi) {
 
-        adminService.add(cPoi);
+        cpoiService.add(cPoi);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Delete cpoi", notes = "Some notes")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        adminService.delete(id);
+        cpoiService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "Update cpoi", notes = "Some notes")
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Admin cPoi) {
-        adminService.update(cPoi);
+    public ResponseEntity<?> update(@RequestBody Cpoi cPoi) {
+        cpoiService.update(cPoi);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
-
