@@ -4,12 +4,13 @@ import com.example.demo.domain.Cpoi;
 import com.example.demo.services.CpoiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/cpoi")
@@ -24,8 +25,8 @@ public class CpoiController {
 
     @ApiOperation(value = "Get list of all Cpois", notes = "Some notes")
     @GetMapping
-    public ResponseEntity<List<Cpoi>> getAll() {
-        return new ResponseEntity<>(cpoiService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Cpoi>> getAll(Pageable pageable) {
+        return new ResponseEntity<>(cpoiService.getAll(pageable), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get single Cpoi by id", notes = "Some notes")

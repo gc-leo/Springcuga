@@ -1,21 +1,23 @@
 package com.example.demo.services;
 
 import com.example.demo.error_handling.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
 public class CrudService<T, ID, R extends MongoRepository<T, ID>> {
 
-    @Autowired
     private R repository;
 
-    public List<T> getAll() {
-        return repository.findAll();
+    public CrudService(R repository) {
+        this.repository = repository;
+    }
+
+    public Page<T> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public T getById(ID id) {

@@ -7,4 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService extends CrudService<Admin, String, AdminRepository> {
 
+    public AdminService(AdminRepository repository) {
+        super(repository);
+    }
 }

@@ -6,4 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CoinService extends CrudService<Coin, String, CoinRepository> {
+
+    public CoinService(CoinRepository repository) {
+        super(repository);
+    }
 }
