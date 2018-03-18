@@ -4,7 +4,6 @@ import com.example.demo.domain.Coin;
 import com.example.demo.services.CoinService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,11 @@ import java.util.List;
 @Api(description = "coin api")
 public class CoinController {
 
-    @Autowired
     private CoinService coinService;
+
+    public CoinController(CoinService coinService) {
+        this.coinService = coinService;
+    }
 
     @ApiOperation(value = "Get list of all Coins", notes = "Some notes")
     @GetMapping
@@ -35,7 +37,6 @@ public class CoinController {
     @ApiOperation(value = "Create coin", notes = "Some notes")
     @PostMapping
     public ResponseEntity<?> add(@Valid @RequestBody Coin cPoi) {
-
         coinService.add(cPoi);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -1,8 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Admin;
 import com.example.demo.domain.Coin;
-import com.example.demo.services.AdminService;
 import com.example.demo.services.CoinService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -21,9 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
