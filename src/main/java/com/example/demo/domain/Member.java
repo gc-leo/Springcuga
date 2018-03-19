@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +25,8 @@ public class Member {
     public String avatar;
     public Contact contact;
     public Credentials credentials;
+    @DBRef
+    private List<Cpoi> id_cpois;
 
 
 }

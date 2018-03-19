@@ -6,16 +6,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+import java.util.Locale;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -45,7 +50,13 @@ public class AdminControllerTest {
         admin = new Admin();
         admin.setEmail("pera@gmail.com");
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(adminController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(adminController).setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+                .setViewResolvers(new ViewResolver() {
+                    @Override
+                    public View resolveViewName(String viewName, Locale locale) throws Exception {
+                        return new MappingJackson2JsonView();
+                    }
+                }).build();
 
     }
 
@@ -54,12 +65,11 @@ public class AdminControllerTest {
     }
 
     @Test
-    @Ignore
     public void getAllTest() throws Exception {
 
-//        mockMvc.perform(get("/admin")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk());
+        mockMvc.perform(get("/admin")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 

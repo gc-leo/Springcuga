@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 
 @Getter
@@ -24,5 +26,7 @@ public class Admin {
     public String email;
     @Valid
     public Profile profile;
+    @DBRef
+    private List<Cpoi> id_cpois;
 
 }
