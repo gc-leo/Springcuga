@@ -1,4 +1,4 @@
-package com.example.demo.api.domain;
+package com.example.demo.external_api.faketory_api.domain;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.example.demo.services;
 
 
-import com.example.demo.api.domain.User;
-import com.example.demo.external_api.ApiService;
+import com.example.demo.external_api.faketory_api.domain.User;
+import com.example.demo.external_api.faketory_api.services.FaketoryApiService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +16,10 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApiServiceImplTest {
+public class FaketoryApiServiceImplTest {
 
     @Autowired
-    ApiService apiService;
+    FaketoryApiService faketoryApiService;
 
     @Before
     public void setUp() throws Exception {
@@ -29,7 +29,7 @@ public class ApiServiceImplTest {
     @Test
     public void testGetUsers() throws Exception {
 
-        List<User> users = apiService.getUsers(3);
+        List<User> users = faketoryApiService.getUsers(3);
 
         assertEquals(4, users.size());
     }

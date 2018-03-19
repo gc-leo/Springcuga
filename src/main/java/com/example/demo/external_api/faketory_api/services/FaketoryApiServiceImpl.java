@@ -1,8 +1,7 @@
-package com.example.demo.external_api;
+package com.example.demo.external_api.faketory_api.services;
 
-import com.example.demo.api.domain.User;
-import com.example.demo.api.domain.UserData;
-import com.example.demo.external_api.ApiService;
+import com.example.demo.external_api.faketory_api.domain.User;
+import com.example.demo.external_api.faketory_api.domain.UserData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,11 +11,11 @@ import java.util.List;
  * Created by jt on 9/21/17.
  */
 @Service
-public class ApiServiceImpl implements ApiService {
+public class FaketoryApiServiceImpl implements FaketoryApiService {
 
     private RestTemplate restTemplate;
 
-    public ApiServiceImpl(RestTemplate restTemplate) {
+    public FaketoryApiServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
