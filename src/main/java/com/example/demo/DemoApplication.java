@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.external_api.weather_api.services.WeatherApiService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -9,12 +10,8 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-//        AdminController controller = (AdminController) context.getBean("adminController");
-//        System.out.println(controller);
-//        String[] beanNames = context.getBeanDefinitionNames();
-//        Arrays.sort(beanNames);
-//        for (String beanName : beanNames) {
-//            System.out.println(beanName);
-//        }
+        WeatherApiService weatherApiService = (WeatherApiService) context.getBean("weatherApiServiceImpl");
+        System.out.println(weatherApiService.getWeatherByCity("Belgrade"));
+
     }
 }
