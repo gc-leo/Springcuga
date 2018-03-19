@@ -1,13 +1,16 @@
 package com.example.demo.services;
 
 import com.example.demo.error_handling.ResourceNotFoundException;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-
+@Getter
+@Setter
 public class CrudService<T, ID, R extends MongoRepository<T, ID>> {
 
     private R repository;
