@@ -1,19 +1,16 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Admin;
-
 import com.example.demo.services.AdminService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -21,14 +18,16 @@ import java.util.List;
 public class AdminController {
 
 
-    @Autowired
     private AdminService adminService;
+
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     @ApiOperation(value = "Get list of all Admins", notes = "Some notes")
     @GetMapping
-    public ResponseEntity<List<Admin>> getAll() {
-        System.out.println("kita" + adminService);
-        return new ResponseEntity<>(adminService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Admin>> getAll(Pageable pageable) {
+        return new ResponseEntity<>(adminService.getAll(pageable), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get single Admin by id", notes = "Some notes")
@@ -40,7 +39,6 @@ public class AdminController {
     @ApiOperation(value = "Create cpoi", notes = "Some notes")
     @PostMapping
     public ResponseEntity<?> add(@Valid @RequestBody Admin cPoi) {
-
         adminService.add(cPoi);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

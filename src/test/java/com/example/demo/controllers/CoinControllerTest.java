@@ -1,8 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Admin;
 import com.example.demo.domain.Coin;
-import com.example.demo.services.AdminService;
 import com.example.demo.services.CoinService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -13,22 +11,27 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.util.ArrayList;
+import java.util.Locale;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@EnableSpringDataWebSupport
+@WebAppConfiguration
 public class CoinControllerTest {
 
     @Mock
@@ -49,7 +52,13 @@ public class CoinControllerTest {
         id = "5aaa67746991b13bae8b9085";
         coin = new Coin(id, "Bitcoin", "BTC");
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(coinController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(coinController).setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+                .setViewResolvers(new ViewResolver() {
+                    @Override
+                    public View resolveViewName(String viewName, Locale locale) throws Exception {
+                        return new MappingJackson2JsonView();
+                    }
+                }).build();
 
     }
 
@@ -60,12 +69,9 @@ public class CoinControllerTest {
     @Test
     public void getAllTest() throws Exception {
 
-        when(coinService.getAll()).thenReturn(new ArrayList<Coin>());
-        mockMvc.perform(get("/coin")
+        mockMvc.perform(get("/coin?page=0&size=20")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
-        verify(coinService, times(1)).getAll();
+                .andExpect(status().isOk());
 
     }
 
