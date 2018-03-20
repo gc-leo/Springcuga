@@ -10,13 +10,6 @@ import org.springframework.context.ApplicationContext;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-        WeatherApiService weatherApiService = (WeatherApiService) context.getBean("weatherApiServiceImpl");
-        System.out.println(weatherApiService.getWeatherByCity("Belgrade"));
-
-        CoinMarketCapApiService coinMarketCapApiService = (CoinMarketCapApiService) context.getBean("coinMarketCapApiServiceImpl");
-        System.out.println(coinMarketCapApiService.getCoinInfo("bitcoin"));
-
-
+        SpringApplication.run(DemoApplication.class, args);
     }
 }

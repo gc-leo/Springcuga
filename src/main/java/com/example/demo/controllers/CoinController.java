@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Coin;
+import com.example.demo.external_api.coin_market_cap_api.domain.CoinInfo;
 import com.example.demo.services.CoinService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,5 +56,11 @@ public class CoinController {
     public ResponseEntity<?> update(@RequestBody Coin cPoi) {
         coinService.update(cPoi);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value="Get Coin Market Cap Details for coin", notes = "Some notes")
+    @GetMapping(value = "coinmarketcap/{id}")
+    public ResponseEntity<CoinInfo> getCoinMarketCapInfoForCoin(@PathVariable String id){
+        return new ResponseEntity<>(coinService.getCoinMarketCapInfosForCoin(id), HttpStatus.OK);
     }
 }
