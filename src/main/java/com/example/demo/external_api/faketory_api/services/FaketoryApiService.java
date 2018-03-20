@@ -1,7 +1,6 @@
 package com.example.demo.external_api.faketory_api.services;
 
 
-
 import com.example.demo.external_api.faketory_api.domain.User;
 
 import java.util.List;
