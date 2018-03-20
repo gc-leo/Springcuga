@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Cpoi;
+import com.example.demo.external_api.weather_api.domain.Weather;
 import com.example.demo.services.CpoiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,5 +56,11 @@ public class CpoiController {
     public ResponseEntity<?> update(@RequestBody Cpoi cPoi) {
         cpoiService.update(cPoi);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get weather for Cpoi", notes = "Some notes")
+    @GetMapping(value = "/weather/{id}")
+    public ResponseEntity<Weather> getWeatherForCpoi(@PathVariable String id) {
+        return new ResponseEntity<>(cpoiService.getWeatherForCpoi(id), HttpStatus.OK);
     }
 }

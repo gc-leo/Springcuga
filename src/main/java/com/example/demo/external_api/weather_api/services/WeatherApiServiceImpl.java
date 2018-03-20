@@ -28,6 +28,7 @@ public class WeatherApiServiceImpl implements WeatherApiService {
                 .fromUriString(api_url)
                 .queryParam("q", city)
                 .queryParam("apikey", api_key);
+
         Weather weather = restTemplate.getForObject(uriComponentsBuilder.toUriString(), Weather.class);
         return weather;
     }
