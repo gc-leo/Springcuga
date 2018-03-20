@@ -1,10 +1,12 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Cpoi;
+import com.example.demo.domain.Location;
 import com.example.demo.external_api.weather_api.domain.Weather;
 import com.example.demo.services.CpoiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cpoi")
@@ -63,4 +66,14 @@ public class CpoiController {
     public ResponseEntity<Weather> getWeatherForCpoi(@PathVariable String id) {
         return new ResponseEntity<>(cpoiService.getWeatherForCpoi(id), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Get near by cpois by location", notes = "Some notes")
+    @PostMapping(value = "/nearby")
+    public ResponseEntity<List<Cpoi>> nearBy(@RequestBody Location location, @RequestParam(value = "radius", required = false) Float radius){
+        if(radius == null)
+            return new ResponseEntity<>(cpoiService.nearBy(location.getLat(), location.getLon(), (float)0.55091), HttpStatus.OK);
+
+        return new ResponseEntity<>(cpoiService.nearBy(location.getLat(), location.getLon(), radius), HttpStatus.OK);
+    }
+
 }
