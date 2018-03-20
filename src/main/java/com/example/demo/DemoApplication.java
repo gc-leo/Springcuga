@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.external_api.coin_market_cap_api.services.CoinMarketCapApiService;
 import com.example.demo.external_api.weather_api.services.WeatherApiService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,10 @@ public class DemoApplication {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
         WeatherApiService weatherApiService = (WeatherApiService) context.getBean("weatherApiServiceImpl");
         System.out.println(weatherApiService.getWeatherByCity("Belgrade"));
+
+        CoinMarketCapApiService coinMarketCapApiService = (CoinMarketCapApiService) context.getBean("coinMarketCapApiServiceImpl");
+        System.out.println(coinMarketCapApiService.getCoinInfo("bitcoin"));
+
 
     }
 }
