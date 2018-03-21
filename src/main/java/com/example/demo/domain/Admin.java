@@ -21,11 +21,11 @@ import java.util.List;
 public class Admin {
 
     @Id
-    public String id;
+    private String id;
     @Email(message = "Invalid email.Please correct it.")
-    public String email;
+    private String email;
     @Valid
-    public Profile profile;
+    private Profile profile;
     @DBRef
     private List<Cpoi> id_cpois;
 

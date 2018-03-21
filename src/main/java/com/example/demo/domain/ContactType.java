@@ -12,8 +12,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class ContactType {
 
-    public String email;
-    public String phone;
-    public String address;
+    private String email;
+    private String phone;
+    private String address;
 
 }

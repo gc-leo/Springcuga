@@ -13,9 +13,9 @@ import org.springframework.data.annotation.Id;
 public class Credentials {
 
     @Id
-    public String id;
-    public String provider;
-    public String principal;
-    public String secret;
+    private String id;
+    private String provider;
+    private String principal;
+    private String secret;
 
 }

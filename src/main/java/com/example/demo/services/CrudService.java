@@ -28,7 +28,7 @@ public class CrudService<T, ID, R extends MongoRepository<T, ID>> {
         if (entity.isPresent()) {
             return entity.get();
         }
-        throw new ResourceNotFoundException("Admin with this id does not exist");
+        throw new ResourceNotFoundException("Entity with this id does not exist");
 
     }
 

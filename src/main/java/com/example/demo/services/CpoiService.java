@@ -3,7 +3,7 @@ package com.example.demo.services;
 import com.example.demo.domain.Cpoi;
 import com.example.demo.external_api.weather_api.domain.Weather;
 import com.example.demo.external_api.weather_api.services.WeatherApiService;
-import com.example.demo.repositories.CpoiRepository;
+import com.example.demo.repositories.cpoi.CpoiRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -13,9 +13,9 @@ import org.springframework.data.annotation.Id;
 public class Label {
 
     @Id
-    public String id;
-    public String name;
-    public String category;
+    private String id;
+    private String name;
+    private String category;
 
 
 }

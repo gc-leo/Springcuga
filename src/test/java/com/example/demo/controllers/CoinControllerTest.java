@@ -50,7 +50,10 @@ public class CoinControllerTest {
     public void setUp() throws Exception {
 
         id = "5aaa67746991b13bae8b9085";
-        coin = new Coin(id, "Bitcoin", "BTC");
+        coin = new Coin();
+        coin.setId(id);
+        coin.setCriptoname("BTC");
+        coin.setName("Bitcoin");
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(coinController).setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
                 .setViewResolvers(new ViewResolver() {

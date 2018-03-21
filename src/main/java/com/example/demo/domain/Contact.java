@@ -13,9 +13,9 @@ import org.springframework.data.annotation.Id;
 public class Contact {
 
     @Id
-    public String id;
-    public ContactType type;
-    public String value;
-    public Boolean is_default;
+    private String id;
+    private ContactType type;
+    private String value;
+    private Boolean is_default;
 
 }

@@ -16,17 +16,17 @@ import javax.validation.constraints.Size;
 public class Profile {
 
     @Id
-    public String id;
+    private String id;
     @Size(min = 1, max = 20)
-    public String name;
+    private String name;
     @Size(min = 1, max = 20)
-    public String given_name;
+    private String given_name;
     @Size(min = 1, max = 20)
-    public String family_name;
+    private String family_name;
     @URL(message = "{URL.admin.profile.link}")
-    public String link;
-    public String picture;
-    public String gender;
-    public String locale;
+    private String link;
+    private String picture;
+    private String gender;
+    private String locale;
 
 }

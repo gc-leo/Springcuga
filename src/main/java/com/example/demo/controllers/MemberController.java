@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.domain.Cpoi;
 import com.example.demo.domain.Member;
 import com.example.demo.services.MemberService;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/member")
@@ -37,9 +39,9 @@ public class MemberController {
 
     @ApiOperation(value = "Create member", notes = "Some notes")
     @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody Member cPoi) {
+    public ResponseEntity<?> add(@Valid @RequestBody Member member) {
 
-        memberService.add(cPoi);
+        memberService.add(member);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -52,8 +54,22 @@ public class MemberController {
 
     @ApiOperation(value = "Update member", notes = "Some notes")
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Member cPoi) {
-        memberService.update(cPoi);
+    public ResponseEntity<?> update(@RequestBody Member member) {
+        memberService.update(member);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get single Member by id", notes = "Some notes")
+    @GetMapping(value = "/{id}/favorites")
+    public ResponseEntity<List<Cpoi>> getMemberFavorites(@PathVariable String id) {
+        return new ResponseEntity<>(memberService.getMemberFavoriteCpois(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Create member", notes = "Some notes")
+    @PostMapping(value = "/{id}/favoritse/{id_cpoi}")
+    public ResponseEntity<?> favorise(String id, String id_cpoi) {
+
+        memberService.favoriseCpoi(id, id_cpoi);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
