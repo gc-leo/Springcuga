@@ -51,17 +51,22 @@ public class ExchangeController {
             System.out.println(ex);
             return false;
         }
-
     }
 
     @ApiOperation(value = "Get list of Converted currencies for base currency input", notes = "Enter one of suppored curencies(BTC,ETH,USD,EUR,RSD) and see out exchange rates")
     @GetMapping(value = "/{currency}")
     public ResponseEntity<Exchange> getByCurrency(@PathVariable String currency) {
 
-        if(!isValidCurrency(currency))
+        if( !exchangeService.isValidCurrency(currency) ){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         else
             return new ResponseEntity<>(exchangeService.getExchangeRates(currency), HttpStatus.OK);
+
+//        if(!isValidCurrency(currency))
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        else
+//            return new ResponseEntity<>(exchangeService.getExchangeRates(currency), HttpStatus.OK);
 
     }
 

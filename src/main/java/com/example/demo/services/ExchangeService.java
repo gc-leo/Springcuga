@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExchangeService extends CrudService<Exchange, String, ExchangeRepository> {
@@ -25,34 +26,50 @@ public class ExchangeService extends CrudService<Exchange, String, ExchangeRepos
         this.coinService = coinService;
     }
 
-//TODO: implemet if they give you list of other curencies
-//public Exchange getExchangeRates(String baseCurency, List<String> currencyList)
+    //TODO: implemet if they give you list of other curencies
+    //public Exchange getExchangeRates(String baseCurency, List<String> currencyList)
 
-    public Exchange getExchangeRates(String baseCurency){
+    public Exchange getExchangeRates(String baseCurency, List<String> currencyList){
+    //        List<String> currencyList = new ArrayList<>();
+    //        currencyList.add("BTC");
+    //        currencyList.add("ETH");
+    //        currencyList.add("USD");
+    //        currencyList.add("EUR");
+    //        currencyList.add("RSD");
 
-        List<String> currencyList = new ArrayList<>();
-        currencyList.add("BTC");
-        currencyList.add("ETH");
-        currencyList.add("USD");
-        currencyList.add("EUR");
-        currencyList.add("RSD");
+            //call cryptoExchangeApiService
+    //        CryptoCurrencyPrice cryptoCurrencyPrice = cryptoExchangeApiService.getCryptoCurrencyPriceByValute(baseCurency,currencyList);
+        return null;
+    }
 
-        //call cryptoExchangeApiService
-        CryptoCurrencyPrice cryptoCurrencyPrice = cryptoExchangeApiService.getCryptoCurrencyPriceByValute(baseCurency,currencyList);
+    public Exchange getExchangeRates(String baseCurrency){
 
-        Coin coin = coinService.getRepository().findCoinByCriptoname(baseCurency);
+        CryptoCurrencyPrice cryptoCurrencyPrice = cryptoExchangeApiService.getCryptoCurrencyPriceByValute(baseCurrency);
 
-        Exchange ex = new Exchange();
-        ex.setBaseCurrency(coin);
+        Optional<Coin> c = coinService.getRepository().findCoinByCriptoname(baseCurrency);
+        if (c.isPresent()) {
 
-        ExchangeRates exchangeRates = new ExchangeRates();
-        exchangeRates.setBtc( cryptoCurrencyPrice.getBTC() );
-        exchangeRates.setEth( cryptoCurrencyPrice.getETH() );
-        exchangeRates.setRsd( cryptoCurrencyPrice.getRSD() );
-        exchangeRates.setUsd( cryptoCurrencyPrice.getUSD() );
-        exchangeRates.setEur( cryptoCurrencyPrice.getEUR() );
+            Exchange ex = new Exchange();
+            ex.setBaseCurrency(c.get());
 
-        return ex;
+            ExchangeRates exchangeRates = new ExchangeRates();
+            exchangeRates.setBtc( cryptoCurrencyPrice.getBTC() );
+            exchangeRates.setEth( cryptoCurrencyPrice.getETH() );
+            exchangeRates.setRsd( cryptoCurrencyPrice.getRSD() );
+            exchangeRates.setUsd( cryptoCurrencyPrice.getUSD() );
+            exchangeRates.setEur( cryptoCurrencyPrice.getEUR() );
+            ex.setExchangeRates(exchangeRates);
+
+            return ex;
+        }
+        else return null;
+    }
+
+    public Boolean isValidCurrency(String currency){
+        Optional<Coin> c = coinService.getRepository().findCoinByCriptoname(currency);
+        if (c.isPresent()) return true;
+
+        else return false;
     }
 
 }
