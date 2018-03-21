@@ -16,26 +16,38 @@ public class CryptoExchangeApiServiceImpl implements CryptoExchangeApiService{
     @Value("${cryptocompare.api.url}")
     private String baseUrl;
 
-
     public CryptoExchangeApiServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Override
-    public CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency, List<String> curencies) {
+    public CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency, List<String> currencies) {
 
         //https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=BTC,USD,EUR,RSD
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder
                 .fromUriString(baseUrl)
-                .queryParam("fsym",baseCurrency)   //should be Currency param
-                .queryParam("tsyms",String.join(",", curencies));
+                .queryParam("fsym",baseCurrency)
+                .queryParam("tsyms",String.join(",", currencies));
 
-        System.out.println(curencies);
+        System.out.println(currencies);
 
         System.out.println(uriComponentsBuilder.toUriString());
 
         CryptoCurrencyPrice ccp = restTemplate.getForObject(uriComponentsBuilder.toUriString(), CryptoCurrencyPrice.class);
         return ccp;
 
+    }
+
+    @Override
+    public CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency) {
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder
+                .fromUriString(baseUrl)
+                .queryParam("fsym",baseCurrency)
+                //can be readed from supported currencies config
+                //or maybe we could get list of all our currencies and do api search for that params
+                .queryParam("tsyms","BTC,ETH,USD,EUR,RSD");
+
+        CryptoCurrencyPrice ccp = restTemplate.getForObject(uriComponentsBuilder.toUriString(), CryptoCurrencyPrice.class);
+        return ccp;
     }
 }

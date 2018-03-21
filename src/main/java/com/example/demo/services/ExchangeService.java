@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
+import com.example.demo.domain.Coin;
 import com.example.demo.domain.Exchange;
+import com.example.demo.domain.ExchangeRates;
 import com.example.demo.external_api.criptocompare_api.domain.CryptoCurrencyPrice;
 import com.example.demo.external_api.criptocompare_api.services.CryptoExchangeApiService;
 import com.example.demo.repositories.ExchangeRepository;
@@ -15,16 +17,18 @@ public class ExchangeService extends CrudService<Exchange, String, ExchangeRepos
 
     public CryptoExchangeApiService cryptoExchangeApiService;
 
-    public ExchangeService(ExchangeRepository repository, CryptoExchangeApiService cryptoExchangeApiService){
+    public CoinService coinService;
+
+    public ExchangeService(ExchangeRepository repository, CryptoExchangeApiService cryptoExchangeApiService, CoinService coinService){
         super(repository);
         this.cryptoExchangeApiService =  cryptoExchangeApiService;
+        this.coinService = coinService;
     }
 
-
 //TODO: implemet if they give you list of other curencies
-//public Exchange getExchangeCurrency(String baseCurency, List<String> currencyList)
+//public Exchange getExchangeRates(String baseCurency, List<String> currencyList)
 
-    public Exchange getExchangeCurrency(String baseCurency){
+    public Exchange getExchangeRates(String baseCurency){
 
         List<String> currencyList = new ArrayList<>();
         currencyList.add("BTC");
@@ -33,14 +37,21 @@ public class ExchangeService extends CrudService<Exchange, String, ExchangeRepos
         currencyList.add("EUR");
         currencyList.add("RSD");
 
+        //call cryptoExchangeApiService
         CryptoCurrencyPrice cryptoCurrencyPrice = cryptoExchangeApiService.getCryptoCurrencyPriceByValute(baseCurency,currencyList);
 
+        Coin coin = coinService.getRepository().findCoinByCriptoname(baseCurency);
+
         Exchange ex = new Exchange();
-        ex.setBtc(cryptoCurrencyPrice.getBTC()*1.1);
-        ex.setEth(cryptoCurrencyPrice.getETH()*1.1);
-        ex.setRsd(cryptoCurrencyPrice.getRSD()*1.1);
-        ex.setUsd(cryptoCurrencyPrice.getUSD()*1.1);
-        ex.setEur(cryptoCurrencyPrice.getEUR()*1.1);
+        ex.setBaseCurrency(coin);
+
+        ExchangeRates exchangeRates = new ExchangeRates();
+        exchangeRates.setBtc( cryptoCurrencyPrice.getBTC() );
+        exchangeRates.setEth( cryptoCurrencyPrice.getETH() );
+        exchangeRates.setRsd( cryptoCurrencyPrice.getRSD() );
+        exchangeRates.setUsd( cryptoCurrencyPrice.getUSD() );
+        exchangeRates.setEur( cryptoCurrencyPrice.getEUR() );
+
         return ex;
     }
 

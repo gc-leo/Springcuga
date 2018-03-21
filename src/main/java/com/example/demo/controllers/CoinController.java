@@ -58,6 +58,16 @@ public class CoinController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    //This route should be protected hnjo-hnjo
+//    //If mybe admin wana change by hand value of the certain coin?
+//
+//    @ApiOperation(value = "Update Dolar Value of Coin", notes = "Update Dolar Value of Coin")
+//    @PutMapping
+//    public ResponseEntity<?> update(@RequestBody Double value) {
+//        coinService.setCurrenciesDollarValue(Coin);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
     @ApiOperation(value="Get Coin Market Cap Details for coin", notes = "Some notes")
     @GetMapping(value = "coinmarketcap/{id}")
     public ResponseEntity<CoinInfo> getCoinMarketCapInfoForCoin(@PathVariable String id){

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface CryptoExchangeApiService {
 
-    CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency, List<String> curencies);
+    CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency, List<String> currencies);
+    CryptoCurrencyPrice getCryptoCurrencyPriceByValute(String baseCurrency);
 }

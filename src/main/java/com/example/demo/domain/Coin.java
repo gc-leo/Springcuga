@@ -18,4 +18,19 @@ public class Coin {
     public String name;
     public String criptoname;
 
+    //represents coin value in dollars $$$
+    public double dollarValue;
+
+    //THX LOMBOK
+    public Coin(String id, String name, String criptoname) {
+        this.id = id;
+        this.name = name;
+        this.criptoname = criptoname;
+    }
+
+
+    public Coin(String name, String criptoname) {
+        this.name = name;
+        this.criptoname = criptoname;
+    }
 }

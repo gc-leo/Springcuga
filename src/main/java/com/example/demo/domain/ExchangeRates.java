@@ -5,8 +5,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Getter
 @Setter
 @ToString
@@ -14,13 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class Exchange {
+public class ExchangeRates {
 
     @Id
     @JsonIgnore
     public String id;
-//    @Field
-    public Coin baseCurrency;
-    public ExchangeRates exchangeRates;
-
+    //    @Field
+    public double btc;
+    public double eth;
+    public double usd;
+    public double eur;
+    public double rsd;
 }
+

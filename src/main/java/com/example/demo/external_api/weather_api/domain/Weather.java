@@ -18,5 +18,4 @@ public class Weather {
     private MainWeatherStats main;
     private List<SingleWeatherStat> weather;
 
-
 }

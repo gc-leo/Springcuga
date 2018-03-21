@@ -18,25 +18,6 @@ public class DemoApplication {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
         WeatherApiService weatherApiService = (WeatherApiService) context.getBean("weatherApiServiceImpl");
 
-//        CryptoExchangeService cryptoExchangeService = (CryptoExchangeService) context.getBean("cryptoExchangeServiceImpl");
-
-        CryptoExchangeApiService cryptoExchangeApiService = (CryptoExchangeApiService) context.getBean("cryptoExchangeApiServiceImpl");
-
-
-        List<String> currencyList = new ArrayList<>();
-        currencyList.add("BTC");
-        currencyList.add("ETH");
-        currencyList.add("USD");
-        currencyList.add("EUR");
-        currencyList.add("RSD");
-
-        String baseCurency = "BTC";
-
-        System.out.println(cryptoExchangeApiService.getCryptoCurrencyPriceByValute(baseCurency, currencyList));
-
-//        System.out.println(cryptoExchangeService.getCryptoCurrencyPriceByValute(baseCurency, currencyList));
-//        System.out.println("=====================================");
-
         System.out.println(weatherApiService.getWeatherByCity("Belgrade"));
 
     }
