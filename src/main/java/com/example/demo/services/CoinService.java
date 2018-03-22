@@ -10,4 +10,5 @@ public class CoinService extends CrudService<Coin, String, CoinRepository> {
     public CoinService(CoinRepository repository) {
         super(repository);
     }
+
 }
