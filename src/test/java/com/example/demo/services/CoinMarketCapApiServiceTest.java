@@ -1,9 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.external_api.coin_market_cap_api.domain.CoinInfo;
-import com.example.demo.external_api.coin_market_cap_api.domain.CoinInfos;
 import com.example.demo.external_api.coin_market_cap_api.services.CoinMarketCapApiService;
-import org.junit.Before;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
