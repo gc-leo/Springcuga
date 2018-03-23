@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 
 @RestController
 @RequestMapping("/coin")
@@ -27,13 +30,20 @@ public class CoinController {
     @ApiOperation(value = "Get list of all Coins", notes = "Some notes")
     @GetMapping
     public ResponseEntity<Page<Coin>> getAll(Pageable pageable) {
-        return new ResponseEntity<>(coinService.getAll(pageable), HttpStatus.OK);
+        Page<Coin> coins = coinService.getAll(pageable);
+        for (Coin coin : coins.getContent()) {
+            coin.add(linkTo(methodOn(CoinController.class).getById(coin.getIdCoin())).withSelfRel());
+        }
+        return new ResponseEntity<>(coins, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get single Coin by id", notes = "Some notes")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Coin> getById(@PathVariable String id) {
-        return new ResponseEntity<>(coinService.getById(id), HttpStatus.OK);
+        Coin coin = coinService.getById(id);
+        coin.add(linkTo(CoinController.class).withRel("coins"));
+        coin.add(linkTo(methodOn(CoinController.class).getById(id)).withSelfRel());
+        return new ResponseEntity<>(coin, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create coin", notes = "Some notes")

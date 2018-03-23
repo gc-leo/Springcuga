@@ -51,7 +51,7 @@ public class CoinControllerTest {
 
         id = "5aaa67746991b13bae8b9085";
         coin = new Coin();
-        coin.setId(id);
+        coin.setIdCoin(id);
         coin.setCriptoname("BTC");
         coin.setName("Bitcoin");
         MockitoAnnotations.initMocks(this);

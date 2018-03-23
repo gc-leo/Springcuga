@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -11,13 +12,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Document
 public class Coin extends ResourceSupport {
 
     @Id
-    private String id;
+    @JsonProperty("id")
+    private String idCoin;
     private String name;
     private String criptoname;
     @DBRef
