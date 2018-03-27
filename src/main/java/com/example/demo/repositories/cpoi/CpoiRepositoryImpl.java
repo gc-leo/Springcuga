@@ -23,12 +23,12 @@ public class CpoiRepositoryImpl implements CpoiRepositoryCustom {
                 .sum("location.lat").as("latSum")
                 .min("location.lon").as("lonMin");
         ProjectionOperation projectionOperation = Aggregation.project()
-                .andExpression("latSum").as("kurcinalatSum")
-                .andExpression("lonMin").as("kurcinalatMin")
+                .andExpression("latSum").as("Sum")
+                .andExpression("lonMin").as("Min")
                 .andExclude("_id");
-        SortOperation sortByPopDesc = sort(new Sort(Sort.Direction.DESC, "kurcinalatMin"));
-        MatchOperation postMatchOperation = Aggregation.match(Criteria.where("kurcinalatMin").gt(5)
-                .andOperator(Criteria.where("kurcinalatMin").lt(7)));
+        SortOperation sortByPopDesc = sort(new Sort(Sort.Direction.DESC, "Min"));
+        MatchOperation postMatchOperation = Aggregation.match(Criteria.where("Min").gt(5)
+                .andOperator(Criteria.where("Min").lt(7)));
         Aggregation aggregation = Aggregation.newAggregation(matchOperation, groupOperation, projectionOperation, sortByPopDesc, postMatchOperation);
         AggregationResults results = mongoTemplate.aggregate(aggregation, "cpoi", Object.class);
         for (Object object : results.getMappedResults()) {
