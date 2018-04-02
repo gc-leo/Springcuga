@@ -18,19 +18,19 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 public class FaketoryApiServiceImplTest {
 
-    @Autowired
-    FaketoryApiService faketoryApiService;
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-
-    @Test
-    public void testGetUsers() throws Exception {
-
-        List<User> users = faketoryApiService.getUsers(3);
-
-        assertEquals(4, users.size());
-    }
+//    @Autowired
+//    FaketoryApiService faketoryApiService;
+//
+//    @Before
+//    public void setUp() throws Exception {
+//    }
+//
+//
+//    @Test
+//    public void testGetUsers() throws Exception {
+//
+//        List<User> users = faketoryApiService.getUsers(3);
+//
+//        assertEquals(4, users.size());
+//    }
 }

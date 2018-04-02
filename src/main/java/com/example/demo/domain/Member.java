@@ -1,9 +1,6 @@
 package com.example.demo.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +12,10 @@ import java.util.List;
 @Setter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+//@RequiredArgsConstructor
+@Builder
 @Document
 public class Member {
 
@@ -27,6 +28,5 @@ public class Member {
     public Credentials credentials;
     @DBRef
     private List<Cpoi> id_cpois;
-
 
 }

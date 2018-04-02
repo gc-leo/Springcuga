@@ -1,15 +1,13 @@
 package com.example.demo.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
 public class Credentials {
 
     @Id
@@ -17,5 +15,7 @@ public class Credentials {
     public String provider;
     public String principal;
     public String secret;
+    public String role;
+    public String password;
 
 }

@@ -43,7 +43,6 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-
     @Override
     public boolean isAccountNonLocked() {
         return true;

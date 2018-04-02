@@ -1,15 +1,13 @@
 package com.example.demo.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
 public class ContactType {
 
     public String email;

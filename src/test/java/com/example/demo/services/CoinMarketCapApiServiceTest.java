@@ -15,14 +15,14 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 public class CoinMarketCapApiServiceTest {
 
-    @Autowired
-    CoinMarketCapApiService coinMarketCapApiService;
-
-    @Test
-    public void testGetCoinInfo() throws Exception {
+//    @Autowired
+//    CoinMarketCapApiService coinMarketCapApiService;
+//
+//    @Test
+//    public void testGetCoinInfo() throws Exception {
 //
 //        CoinInfo coinInfos = coinMarketCapApiService.getCoinInfo("bitcoin");
 //
 //        assertEquals("1", coinInfos.getInfos());
-    }
+//    }
 }
